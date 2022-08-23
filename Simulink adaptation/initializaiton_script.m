@@ -2,11 +2,10 @@ clearvars
 close all
 clc
 
-%Need to finish this initialization script, need to sort out how the timing
-%and real-time computation will work on simulink and if the initialization
-%parameter can be zero or need to be changed also need to review other user
-%options to run the script. I`m left off at slowly stepping into the
-%program and seeing if it runs
+%Need to rework the matlab function is simulink, not sure if the timing
+%and real-time computation will work. Right now it is not working because
+%the matlab function in simulink cannot use arrays of objects that are
+%needed to upddate the visualization. Not sure how to solve that.
 
 %% USER OPTIONS
 %Choose the model
@@ -198,7 +197,8 @@ xlabel('Roll Command'); ylabel('Pitch Command')
 % Maximum and minimum surfaces' deflection
 max_deflection = reshape([Model3D.Control(:).max_deflection], 2, length(Model3D.Control(:)));
 
-% Refresh plot for flight visualization
+% Create struct to feed into the function
+animation_init_struct.euler_hgt = euler_hgt;
 
 
 
